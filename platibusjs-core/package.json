@@ -1,13 +1,38 @@
 {
-  "name": "platibusjs",
-  "version": "0.0.1",
-  "description": "PlatibusJs middleware for platform and language agnostic decentralized messaging.",
-  "main": "bin/main.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "Thomas Brian <tdbrian@gmail.com>",
-  "license": "MIT",
-  "dependencies": {
-  }
+	"name": "platibusjs",
+	"version": "0.0.1",
+	"description": "PlatibusJs middleware for platform and language agnostic decentralized messaging.",
+	"main": "bin/main.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"author": "Thomas Brian <tdbrian@gmail.com>",
+	"license": "MIT",
+	"dependencies": {
+	},
+
+	// platibus configuration
+
+	// Transport layer to use. Options: 'http'
+	"transport": "http",
+
+	// Endpoints we can send messages out to
+	"endpoints": [
+
+	],
+
+	"topics": [
+
+	],
+
+	"sendRules": [
+
+	],
+
+	"handlingRules": [
+
+	],
+	"subscriptions": [
+
+	]
 }

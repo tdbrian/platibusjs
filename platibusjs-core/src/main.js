@@ -1,22 +1,32 @@
 'use strict';
 
-var bodyParser = require('body-parser');
-var jsonParser = bodyParser.json();
+let bodyParser = require('body-parser');
+let configuration = require('../package.json');
+let bus = require('./bus');
+let httpListener = require('transports/http/httpListener');
 
-class Main {
-    
-    constructor(app) {
-        this.app = app;
-    }
-    
-    start() {
-        this.app.post('/platibus/message', jsonParser, (req, res) => {
-			if (!req.body) return res.sendStatus(400);
-        });
-    }
+let jsonParser = bodyParser.json();
+let transportConfig = configuration.transport;
+let endpoints = [];
+let handlingRules = [];
+
+function start(app, config) => {
+	if(config && config.transport) transportConfig.transport = config.transport;
+	_initTransportListener(transportConfig);
 }
 
-exports.start = (app) => {
-    let platibusMain = new Main(app);
-    return platibusMain.start;
+function _initTransportListener(transportConfig) {
+	switch(transportConfig) {
+		case 'http':
+			httpListener.listenToMessagePost(app);
+			break;
+		default:
+			throw `Can't start platibus with invalid transport config ${transportConfig}.
+			Make sure it's defined in package.json`;
+			break;
+	}
+}
+
+module.exports = {
+    start: start
 }

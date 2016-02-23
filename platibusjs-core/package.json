@@ -12,27 +12,39 @@
 	},
 
 	// platibus configuration
+	"platibusConfigs": {
 
-	// Transport layer to use. Options: 'http'
-	"transport": "http",
+		// default configuration
+		"platibus.httpserver": {
 
-	// Endpoints we can send messages out to
-	"endpoints": [
+			// Transport layer to use. Options: 'http'
+			"transport": "http",
 
-	],
+			// Port for communicating platibus messages across
+			"port": 80612,
 
-	"topics": [
+			// Authentication layer to use. Options: 'none', 'basic'
+			"authenticationScheme": "none",
 
-	],
+			// Endpoints we can send messages out to
+			"endpoints": [
 
-	"sendRules": [
+			],
 
-	],
+			"topics": [
 
-	"handlingRules": [
+			],
 
-	],
-	"subscriptions": [
+			"sendRules": [
 
-	]
+			],
+
+			"handlingRules": [
+
+			],
+			"subscriptions": [
+
+			]
+		}
+	}
 }

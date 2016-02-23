@@ -10,7 +10,7 @@ let transportConfig = configuration.transport;
 let endpoints = [];
 let handlingRules = [];
 
-function start(app, config) => {
+function start(app, config) {
 	if(config && config.transport) transportConfig.transport = config.transport;
 	_initTransportListener(transportConfig);
 }
@@ -21,8 +21,7 @@ function _initTransportListener(transportConfig) {
 			httpListener.listenToMessagePost(app);
 			break;
 		default:
-			throw `Can't start platibus with invalid transport config ${transportConfig}.
-			Make sure it's defined in package.json`;
+			throw `Can't start platibus with invalid transport config ${transportConfig}. Make sure it's defined in package.json`;
 			break;
 	}
 }

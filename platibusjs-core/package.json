@@ -1,50 +1,26 @@
 {
-	"name": "platibusjs",
-	"version": "0.0.1",
-	"description": "PlatibusJs middleware for platform and language agnostic decentralized messaging.",
-	"main": "bin/main.js",
-	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1"
-	},
-	"author": "Thomas Brian <tdbrian@gmail.com>",
-	"license": "MIT",
-	"dependencies": {
-	},
-
-	// platibus configuration
-	"platibusConfigs": {
-
-		// default configuration
-		"platibus.httpserver": {
-
-			// Transport layer to use. Options: 'http'
-			"transport": "http",
-
-			// Port for communicating platibus messages across
-			"port": 80612,
-
-			// Authentication layer to use. Options: 'none', 'basic'
-			"authenticationScheme": "none",
-
-			// Endpoints we can send messages out to
-			"endpoints": [
-
-			],
-
-			"topics": [
-
-			],
-
-			"sendRules": [
-
-			],
-
-			"handlingRules": [
-
-			],
-			"subscriptions": [
-
-			]
-		}
-	}
+  "name": "platibusjs",
+  "version": "0.0.1",
+  "description": "PlatibusJs middleware for platform and language agnostic decentralized messaging.",
+  "main": "bin/main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Thomas Brian <tdbrian@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "director": "^1.2.8"
+  },
+  "platibusConfigs": {
+    "platibus.httpserver": {
+      "transport": "http",
+      "port": 80612,
+      "authenticationScheme": "none",
+      "endpoints": [],
+      "topics": [],
+      "sendRules": [],
+      "handlingRules": [],
+      "subscriptions": []
+    }
+  }
 }

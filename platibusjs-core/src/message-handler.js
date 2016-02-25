@@ -1,5 +1,9 @@
 'use strict';
 
-module.exports = (message) => {
-	
+function handleMessage(messageId) {
+
+}
+
+module.exports = {
+	handleMessage: handleMessage
 };

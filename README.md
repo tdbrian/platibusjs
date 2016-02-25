@@ -2,4 +2,4 @@
 Decentralized asynchronous messaging framework on NodeJS
 
 ## Status
-A port of Platibus on NodeJS current WIP based on [Platibus](https://github.com/sweetlandj/Platibus)
+A port of [Platibus](https://github.com/sweetlandj/Platibus) on NodeJS current WIP

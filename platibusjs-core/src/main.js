@@ -1,31 +1,21 @@
 'use strict';
 
-let bodyParser = require('body-parser');
-let configuration = require('../package.json');
-let bus = require('./bus');
-let httpListener = require('transports/http/httpListener');
+const bodyParser = require('body-parser');
+const configuration = require('../package.json');
+const bus = require('./bus');
+const transports = require('./transports/transports')
 
-let jsonParser = bodyParser.json();
-let transportConfig = configuration.transport;
+const jsonParser = bodyParser.json();
+const transportConfig = configuration.transport;
+
 let endpoints = [];
 let handlingRules = [];
 
 function start(app, config) {
 	if(config && config.transport) transportConfig.transport = config.transport;
-	_initTransportListener(transportConfig);
-}
-
-function _initTransportListener(transportConfig) {
-	switch(transportConfig) {
-		case 'http':
-			httpListener.listenToMessagePost(app);
-			break;
-		default:
-			throw `Can't start platibus with invalid transport config ${transportConfig}. Make sure it's defined in package.json`;
-			break;
-	}
+	transports.setupTransport(transportConfig);
 }
 
 module.exports = {
     start: start
-}
+};

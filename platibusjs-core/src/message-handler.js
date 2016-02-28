@@ -5,5 +5,5 @@ function handleMessage(messageId) {
 }
 
 module.exports = {
-	handleMessage: handleMessage
+  handleMessage: handleMessage
 };

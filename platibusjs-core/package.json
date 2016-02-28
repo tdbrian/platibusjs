@@ -9,7 +9,9 @@
   "author": "Thomas Brian <tdbrian@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "director": "^1.2.8"
+    "body-parser": "^1.15.0",
+    "director": "^1.2.8",
+    "lodash": "^4.5.1"
   },
   "platibusConfigs": {
     "platibus.httpserver": {
@@ -22,5 +24,11 @@
       "handlingRules": [],
       "subscriptions": []
     }
+  },
+  "jshintConfig": {
+    "esversion": 6,
+    "strict": true,
+    "node": true,
+    "validthis": true
   }
 }

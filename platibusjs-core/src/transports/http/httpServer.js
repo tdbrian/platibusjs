@@ -6,7 +6,7 @@ const director = require('director');
 
 const configuration = require('../../../package.json');
 const httpConfiguration = require('./httpConfiguration.js');
-const messageHandler = require('../message-handler.js');
+const messageHandler = require('../../message-handler.js');
 
 let router;
 let server;
@@ -20,9 +20,9 @@ function start(configSectionName) {
 
 function _setupRouter() {
 	router = new director.http.Router({
-    	'/platibus': { get: _showPlatibusStatus }
-    	'/platibus/message/:messageId': { post: messageHandler.handleMessage }
-  	});
+  	'/platibus': { get: _showPlatibusStatus },
+  	'/platibus/message/:messageId': { post: messageHandler.handleMessage }
+	});
 }
 
 function _showPlatibusStatus() {
@@ -32,18 +32,18 @@ function _showPlatibusStatus() {
 
 function _init() {
 	server = http.createServer((req, res) => {
-    	_dispatchRouter(req, res);
+  	_dispatchRouter(req, res);
 	});
 }
 
 function _dispatchRouter(req, res) {
-    router.dispatch(req, res, _handleRouterError);
+	router.dispatch(req, res, _handleRouterError);
 }
 
 function _handleRouterError(err) {
 	if (err) {
-		res.writeHead(404);
-		res.end();
+		this.res.writeHead(404);
+		this.res.end();
 	}
 }
 
@@ -55,6 +55,7 @@ function _listen(config) {
 
 function _getConfiguration(configSectionName) {
 	if (!configSectionName) configSectionName = 'platibus.httpserver';
+	console.log(`getting config ${configSectionName}`);
 	let configuration = configuration[configSectionName];
 	if (!configuration) configuration = httpConfiguration.getDefaultConfiguration();
 	return configuration;
@@ -69,6 +70,6 @@ function stop() {
 }
 
 module.exports = {
-	start: start,
-	stope: stop
-}
+  start: start,
+  stope: stop
+};

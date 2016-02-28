@@ -1,18 +1,19 @@
-'use strict'
+'use strict';
 
-const httpListener = require('./transports/http/httpListener');
+const httpServer = require('./http/httpServer');
 
-function initTransportListener(transportConfig) {
-	switch(transportConfig) {
-		case 'http':
-			httpListener.listenToMessagePost(app);
-			break;
-		default:
-			throw `Can't start platibus with invalid transport config ${transportConfig}. Make sure it's defined in package.json`;
-			break;
-	}
+function initTransport(config) {
+  console.log(`Start transport type: ${config}`);
+  switch (config.transport) {
+    case 'http':
+      httpServer.start(config.name);
+      break;
+    default:
+      throw `Can't start platibus with invalid transport config ${config.transport}.
+				Make sure it's defined in package.json`;
+  }
 }
 
 module.exports = {
-    setupTransport: initTransportListener
-}
+  initTransport: initTransport
+};

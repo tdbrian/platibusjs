@@ -16,7 +16,7 @@
   "platibusConfigs": {
     "platibus.httpserver": {
       "transport": "http",
-      "port": 80612,
+      "port": 8611,
       "authenticationScheme": "none",
       "endpoints": [],
       "topics": [],

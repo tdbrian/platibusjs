@@ -1,0 +1,11 @@
+{
+  "name": "platibusjs",
+  "version": "0.0.1",
+  "description": "PlatibusJs entire run solution",
+  "main": "",
+  "scripts": {
+    "test": "mocha \"platibusjs-tests/**/*.spec.js\""
+  },
+  "author": "Thomas Brian <tdbrian@gmail.com>",
+  "license": "MIT"
+}

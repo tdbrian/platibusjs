@@ -4,8 +4,14 @@ const configuration = require('../package.json');
 const _ = require('lodash');
 
 function dertermineConfig(config) {
+	let configName = config;
 	if(!config) config = _getDefaultConfig();
-	if(_.isString(config)) config = configuration[config];
+
+	if(_.isString(config) && configuration.platibusConfigs) {
+		config = configuration.platibusConfigs[config];
+		if(!config) throw `Unable to find configuration for ${configName}`;
+	}
+
 	return config;
 }
 

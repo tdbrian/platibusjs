@@ -11,8 +11,7 @@ const messageHandler = require('../../message-handler.js');
 let router;
 let server;
 
-function start(configSectionName) {
-	let config = _getConfiguration(configSectionName);
+function start(config) {
 	_setupRouter();
 	_init();
 	_listen(config);
@@ -27,7 +26,8 @@ function _setupRouter() {
 
 function _showPlatibusStatus() {
 	this.res.writeHead(200, { 'content-type': 'application/json' });
-	this.res.end({ status: 'running' });
+	let status = { status: 'running' };
+	this.res.end(JSON.stringify(status));
 }
 
 function _init() {
@@ -49,13 +49,12 @@ function _handleRouterError(err) {
 
 function _listen(config) {
 	let port = config.port ? config.port : 8080;
-	server.listen(config.port);
-	console.log('PlatibusJs has started on');
+	server.listen(port);
+	console.log(`PlatibusJs has started listening for messages on ${port}`);
 }
 
-function _getConfiguration(configSectionName) {
+function _getDefaultConfiguration(configSectionName) {
 	if (!configSectionName) configSectionName = 'platibus.httpserver';
-	console.log(`getting config ${configSectionName}`);
 	let configuration = configuration[configSectionName];
 	if (!configuration) configuration = httpConfiguration.getDefaultConfiguration();
 	return configuration;

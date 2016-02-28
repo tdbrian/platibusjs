@@ -6,7 +6,7 @@ function initTransport(config) {
   console.log(`Start transport type: ${config}`);
   switch (config.transport) {
     case 'http':
-      httpServer.start(config.name);
+      httpServer.start(config);
       break;
     default:
       throw `Can't start platibus with invalid transport config ${config.transport}.

@@ -1,15 +1,25 @@
 'use strict';
 
 const chai = require('chai');
-const expect = chai.expect;
+const request = require('request');
 const platibusjs = require('../../platibusjs-core/src/main');
 
-describe('test wallaby', () => {
+const expect = chai.expect;
 
-  it('should run', (done) => {
-    platibusjs.start();
-    expect(true).to.be.true;
-    done();
+describe('PlatibusJs server no config', () => {
+
+  before((done) => {
+    platibusjs.start((err) => {
+      done();
+    });
+  });
+
+  it('should return a running status', (done) => {
+    request('http://localhost:8612/platibus', (err, res, body) => {
+      let status = JSON.parse(body).status;
+      expect(status).to.equal('running');
+      done();
+    });
   });
 
 });

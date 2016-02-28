@@ -11,10 +11,10 @@ const messageHandler = require('../../message-handler.js');
 let router;
 let server;
 
-function start(config) {
+function start(config, cb) {
 	_setupRouter();
 	_init();
-	_listen(config);
+	_listen(config, cb);
 }
 
 function _setupRouter() {
@@ -47,9 +47,9 @@ function _handleRouterError(err) {
 	}
 }
 
-function _listen(config) {
+function _listen(config, cb) {
 	let port = config.port ? config.port : 8080;
-	server.listen(port);
+	server.listen(port, (err) => { if(cb) cb(err); });
 	console.log(`PlatibusJs has started listening for messages on ${port}`);
 }
 

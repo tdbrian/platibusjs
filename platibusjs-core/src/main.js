@@ -1,38 +1,25 @@
 'use strict';
 
-const bodyParser = require('body-parser');
-const configuration = require('../package.json');
-const bus = require('./bus');
 const transports = require('./transports/transports');
+const configuration = require('./configuration');
 const _ = require('lodash');
-
-const jsonParser = bodyParser.json();
 
 let endpoints = [];
 let handlingRules = [];
 
-function start(config) {
-	config = _dertermineConfig(config);
-	transports.initTransport(config);
+function start(config, cb) {
+	if(_.isFunction(config)) {
+		cb = config;
+		_startWithDefault(cb);
+	} else {
+		config = configuration.dertermineConfig(config);
+		transports.initTransport(config, cb);
+	}
 }
 
-function _dertermineConfig(config) {
-	if(!config) config = _getDefaultConfig();
-	if(_.isString(config)) config = configuration[config];
-	return config;
-}
-
-function _getDefaultConfig() {
-	return {
-		transport: 'http',
-  	port: 80612,
-  	authenticationScheme: 'none',
-  	endpoints: [],
-  	topics: [],
-  	sendRules: [],
-  	handlingRules: [],
-  	subscriptions: []
-  };
+function _startWithDefault(cb) {
+	let config = configuration.dertermineConfig();
+	transports.initTransport(config, cb);
 }
 
 module.exports = {

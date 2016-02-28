@@ -18,8 +18,7 @@
     "node": true,
     "validthis": true,
     "mocha": true,
-    "expr" :true
+    "expr": true
   },
-  "devDependencies": {
-  }
+  "devDependencies": {}
 }

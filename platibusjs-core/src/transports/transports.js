@@ -1,11 +1,12 @@
 'use strict';
 
-const httpServer = require('./http/httpServer');
+const HttpServer = require('./http/httpServer').HttpServer;
 
 function initTransport(config, cb) {
   switch (config.transport) {
     case 'http':
-      httpServer.start(config, cb);
+      let server = new HttpServer();
+      server.start(config, cb);
       break;
     default:
       throw `Can't start platibus with invalid transport config ${config.transport}.

@@ -10,7 +10,7 @@ function getDefaultConfiguration() {
 		handlingRules: [],
 		subscriptions: [],
 		port: 80612
-	}
+	};
 }
 
 module.exports = {

@@ -1,5 +1,7 @@
 'use strict';
 
+const _ = require('lodash');
+
 let _messageQueues = [];
 
 function createQueue(queueName, listener, options) {
@@ -14,7 +16,7 @@ function createQueue(queueName, listener, options) {
 	};
 
 	if(!_findQueue(queueName)) _messageQueues.push(newQueue);
-	else console.error(`Unable to create queue. One already exists with the name ${queueName}`;
+	else console.error(`Unable to create queue. One already exists with the name ${queueName}`);
 }
 
 function enqueueMessage(queueName, message, user, cancellationToken) {
@@ -42,5 +44,5 @@ module.exports = {
 	createQueue: createQueue,
 	sendMessage: sendMessage,
 	publishMessage: publishMessage,
-	send: send
+	send: sendMessage
 };

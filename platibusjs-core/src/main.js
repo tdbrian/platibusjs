@@ -7,15 +7,32 @@ const transports = require('./transports/transports');
 const _ = require('lodash');
 
 const jsonParser = bodyParser.json();
-let configTransport = configuration.transport;
 
 let endpoints = [];
 let handlingRules = [];
 
 function start(config) {
-	if(_.isString(config)) config = configuration[config];
-	if(!config) throw 'There is no configuration';
+	config = _dertermineConfig(config);
 	transports.initTransport(config);
+}
+
+function _dertermineConfig(config) {
+	if(!config) config = _getDefaultConfig();
+	if(_.isString(config)) config = configuration[config];
+	return config;
+}
+
+function _getDefaultConfig() {
+	return {
+		transport: 'http',
+  	port: 80612,
+  	authenticationScheme: 'none',
+  	endpoints: [],
+  	topics: [],
+  	sendRules: [],
+  	handlingRules: [],
+  	subscriptions: []
+  };
 }
 
 module.exports = {

@@ -3,7 +3,7 @@
 const httpServer = require('./http/httpServer');
 
 function initTransport(config) {
-  console.log(`Start transport type: ${config}`);
+  console.log(`Start transport type: ${config.transport}`);
   switch (config.transport) {
     case 'http':
       httpServer.start(config);

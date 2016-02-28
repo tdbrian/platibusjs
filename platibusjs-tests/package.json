@@ -9,12 +9,17 @@
   "author": "Thomas Brian <tdbrian@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "lodash": "^4.5.1"
+    "lodash": "^4.5.1",
+    "request": "^2.69.0"
   },
   "jshintConfig": {
     "esversion": 6,
     "strict": true,
     "node": true,
-    "validthis": true
+    "validthis": true,
+    "mocha": true,
+    "expr" :true
+  },
+  "devDependencies": {
   }
 }

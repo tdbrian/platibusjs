@@ -12,57 +12,65 @@ const defaultPort = 8081;
 
 class HttpServer {
 
-	start(config, cb) {
-		this._setupRouter();
-		this._init();
-		this._listen(config, cb);
+	start(config) {
+		this.setupRouter();
+		this.init();
+		return this.listen(config);
 	}
 
-	_setupRouter() {
+	setupRouter() {
 		this.router = new director.http.Router({
-	  	'/platibus': { get: this._showPlatibusStatus },
-	  	'/platibus/message/:messageId': { post: messageHandler.handleMessage }
+	  		'/platibus': { get: this.showPlatibusStatus },
+	  		'/platibus/message/:messageId': { post: messageHandler.handleMessage }
 		});
 	}
 
-	_showPlatibusStatus() {
+	showPlatibusStatus() {
 		this.res.writeHead(200, { 'content-type': 'application/json' });
 		let status = { status: 'running' };
 		this.res.end(JSON.stringify(status));
 	}
 
-	_init() {
+	init() {
 		this.server = http.createServer((req, res) => {
-	  	this._dispatchRouter(req, res);
+	  		this.dispatchRouter(req, res);
 		});
 	}
 
-	_dispatchRouter(req, res) {
-		this.router.dispatch(req, res, this._handleRouterError);
+	dispatchRouter(req, res) {
+		this.router.dispatch(req, res, this.handleRouterError);
 	}
 
-	_handleRouterError(err) {
+	handleRouterError(err) {
 		if (err) {
 			this.res.writeHead(404);
 			this.res.end();
 		}
 	}
 
-	_listen(config, cb) {
-		this.port = config.port ? config.port : defaultPort;
-		this.server.listen(this.port, (err) => { if(cb) cb(err); });
-		console.log(`PlatibusJs has started listening for messages on ${this.port}`);
+	listen(config) {
+		return new Promise((fulfill, reject) => {
+			this.port = config.port ? config.port: defaultPort;
+			this.server.listen(this.port, (err) => {
+				if(err) return reject(err);
+				console.log(`PlatibusJs has started listening for messages on ${this.port}`);
+				fulfill();
+			});
+		});
 	}
 
 	stop() {
-		this.server.close(() => {
-			console.log('PlatibusJs has stopped.');
-			this.server = null;
-			this.router = null;
-		});
+		return new Promise((fulfill, reject) => {
+			this.server.close(() => {
+				console.log('PlatibusJs has stopped.');
+				this.server = null;
+				this.router = null;
+				fulfill();
+			});
+		)};
 	}
 }
 
 module.exports = {
-  HttpServer: HttpServer
+	HttpServer: HttpServer
 };

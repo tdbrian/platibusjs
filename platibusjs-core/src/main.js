@@ -7,21 +7,31 @@ const _ = require('lodash');
 let endpoints = [];
 let handlingRules = [];
 
-function start(config, cb) {
+function startTransports(configurations) {
 	if(_.isFunction(config)) {
-		cb = config;
-		_startWithDefault(cb);
+		return startTransportsWithDefault();
 	} else {
-		config = configuration.dertermineConfig(config);
-		transports.initTransport(config, cb);
+		let services = configuration.dertermineConfig(configurations);
+		return transports.initTransports(services);
 	}
 }
 
-function _startWithDefault(cb) {
-	let config = configuration.dertermineConfig();
-	transports.initTransport(config, cb);
+function startTransportsWithDefault() {
+	let cservices = configuration.dertermineConfig();
+	return transports.initTransports(services);
+}
+
+function startTransport(transportConfiguration) {
+	return transports.startTransport(transportConfiguration);
+}
+
+function stopTransport(name) {
+	return transports.stopTransport();
 }
 
 module.exports = {
-    start: start
+    startAll: startTransports,
+	start: startTransport,
+	stopAll: stopTransports,
+	stop: stopTransport
 };

@@ -18,14 +18,14 @@ function dertermineConfig(config) {
 function _getDefaultConfig() {
 	return {
 		transport: 'http',
-  	port: 8612,
-  	authenticationScheme: 'none',
-  	endpoints: [],
-  	topics: [],
-  	sendRules: [],
-  	handlingRules: [],
-  	subscriptions: []
-  };
+		port: 8612,
+		authenticationScheme: 'none',
+		endpoints: [],
+		topics: [],
+		sendRules: [],
+		handlingRules: [],
+		subscriptions: []
+  	};
 }
 
 module.exports = {

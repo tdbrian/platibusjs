@@ -1,21 +1,34 @@
 'use strict';
 
-let configuration = require('../package.json');
+const configuration = require('../package.json');
+const transports = require('./transports/transports');
 
-let endpoints = configuration.endpoints;
-let topics = configuration.topics;
-let sendRules = configuration.sendRules;
-let handlingRules = configuration.handlingRules;
-let subscriptions = configuration.subscriptions;
+class Bus {
+	constructor() {
+		this.endpoints = configuration.endpoints;
+		this.topics = configuration.topics;
+		this.sendRules = configuration.sendRules;
+		this.handlingRules = configuration.handlingRules;
+		this.subscriptions = configuration.subscriptions;
+	}
 
-function init(configOptions) {
-	if(configOptions.endpoints) endpoints = configOptions.endpoints;
-	if(configOptions.topics) topics = configOptions.topics;
-	if(configOptions.sendRules) sendRules = configOptions.sendRules;
-	if(configOptions.handlingRules) handlingRules = configOptions.handlingRules;
-	if(configOptions.subscriptions) subscriptions = configOptions.subscriptions;
+	init(configOptions) {
+		if(configOptions.endpoints) this.endpoints = configOptions.endpoints;
+		if(configOptions.topics) this.topics = configOptions.topics;
+		if(configOptions.sendRules) this.sendRules = configOptions.sendRules;
+		if(configOptions.handlingRules) this.handlingRules = configOptions.handlingRules;
+		if(configOptions.subscriptions) this.subscriptions = configOptions.subscriptions;
+	}
+
+	startTransport(transportConfiguration) {
+		return transports.startTransport(transportConfiguration);
+	}
+
+	stopTransport(name) {
+		return transports.stopTransport();
+	}
 }
 
 module.exports = {
-	init: init
+	Bus: Bus
 };

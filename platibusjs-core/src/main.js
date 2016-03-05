@@ -1,7 +1,7 @@
 'use strict';
 
-const transports = require('./transports/transports');
 const configuration = require('./configuration');
+const Bus = require('./bus').Bus;
 const _ = require('lodash');
 
 let endpoints = [];
@@ -21,8 +21,9 @@ function startTransportsWithDefault() {
 	return transports.initTransports(services);
 }
 
-function startTransport(transportConfiguration) {
-	return transports.startTransport(transportConfiguration);
+function startBus(transportConfiguration) {
+	let bus = new Bus();
+	return bus.init(transportConfiguration);
 }
 
 function stopTransport(name) {

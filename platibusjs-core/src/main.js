@@ -1,38 +1,21 @@
-'use strict';
+'use strict'
 
-const configuration = require('./configuration');
-const Bus = require('./bus').Bus;
-const _ = require('lodash');
+const busManager = require('./bus-manager')
+const _ = require('lodash')
 
-let endpoints = [];
-let handlingRules = [];
-
-function startTransports(configurations) {
-	if(_.isFunction(config)) {
-		return startTransportsWithDefault();
-	} else {
-		let services = configuration.dertermineConfig(configurations);
-		return transports.initTransports(services);
-	}
+exports.startAll = (busConfigurations) => {
+	busManager.startAllBuses(busConfigurations);
 }
 
-function startTransportsWithDefault() {
-	let cservices = configuration.dertermineConfig();
-	return transports.initTransports(services);
+exports.start = (busConfiguration) => {
+	let configuration = configuration.dertermineConfig(busConfiguration)
+	return transports.initBus(configuration)
 }
 
-function startBus(transportConfiguration) {
-	let bus = new Bus();
-	return bus.init(transportConfiguration);
+function stopBus(name) {
+	return transports.stopTransport()
 }
 
-function stopTransport(name) {
-	return transports.stopTransport();
-}
+function stopAllBuses() {
 
-module.exports = {
-    startAll: startTransports,
-	start: startTransport,
-	stopAll: stopTransports,
-	stop: stopTransport
-};
+}

@@ -1,10 +1,9 @@
 'use strict';
 
-const configuration = require('../package.json');
 const transports = require('./transports/transports');
 
 class Bus {
-	constructor() {
+	constructor(configuration) {
 		this.endpoints = configuration.endpoints;
 		this.topics = configuration.topics;
 		this.sendRules = configuration.sendRules;

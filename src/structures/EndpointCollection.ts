@@ -1,6 +1,6 @@
-import { EndpointInterface, EndpointCollectionInterface } from './';
+import { EndpointInterface } from '../';
 
-export class EndpointCollection implements EndpointCollectionInterface {
+export class EndpointCollection {
 	private readonly endpoints: { [email: string]: EndpointInterface; };
 	
 	GetEndpoint(endpointName: string): EndpointInterface {

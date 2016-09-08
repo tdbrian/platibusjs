@@ -1,0 +1,5 @@
+{
+  "globalDependencies": {
+    "node-cache": "registry:dt/node-cache#3.0.0+20160815013826"
+  }
+}

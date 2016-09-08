@@ -1,11 +1,20 @@
 {
   "name": "platibusjs",
-  "version": "0.0.1",
-  "description": "PlatibusJs entire run solution",
-  "main": "",
+  "version": "1.0.0",
+  "description": "Port of Platibus to JS",
+  "main": "src/main.js",
   "scripts": {
-    "test": "mocha \"platibusjs-tests/**/*.spec.js\""
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Thomas Brian <tdbrian@gmail.com>",
-  "license": "MIT"
+  "author": "Thomas Brian",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^2.1.0-dev.20160907"
+  },
+  "typings": [
+    "node"
+  ],
+  "dependencies": {
+    "@types/node": "^6.0.38"
+  }
 }

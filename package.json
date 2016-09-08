@@ -13,11 +13,14 @@
   },
   "typings": [
     "node",
-    "node-cache"
+    "node-cache",
+    "lodash"
   ],
   "dependencies": {
+    "@types/lodash": "^4.14.34",
     "@types/node": "^6.0.38",
     "@types/node-cache": "^3.0.29",
+    "lodash": "^4.15.0",
     "node-cache": "^3.2.1"
   }
 }

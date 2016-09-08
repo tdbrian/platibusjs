@@ -1,10 +1,15 @@
-import { EndpointInterface, EndpointCredentialsInterface } from '../';
+/**
+ * Initializes a new <see cref="Endpoint"/> with the specified address and credentials
+ * @export
+ * @class Endpoint
+ */
+export class Endpoint {
+	constructor(
+		readonly address = '',
+		readonly credentials?: string
+	) { }
 
-export class Endpoint implements EndpointInterface {
-	private readonly credentials: EndpointCredentialsInterface;
-
-	getAddress(): string {
-		// TODO: Implement
-		return '';
+	toString(): string {
+		return this.address;
 	}
 }

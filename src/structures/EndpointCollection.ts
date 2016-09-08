@@ -1,15 +1,15 @@
-import { EndpointInterface } from '../';
+import { Endpoint } from '../';
+import * as _ from 'lodash';
 
 export class EndpointCollection {
-	private readonly endpoints: { [email: string]: EndpointInterface; };
+	private readonly endpoints: { [name: string]: Endpoint; };
 	
-	GetEndpoint(endpointName: string): EndpointInterface {
-		// TODO: Implement
-		return <EndpointInterface>{};
-	};
+	TryGetEndpointByName(endpointName: string): Endpoint | false {
+		return _.includes(_.keys(this.endpoints), endpointName) ? this.endpoints[endpointName] : false;
+	}
 	
-	TryGetEndpointByAddress(address: string, endpoint: EndpointInterface): boolean {
-		// TODO: Implement
-		return false;
-	};
+	TryGetEndpointByAddress(address: string): Endpoint | false {
+		let endpoint = _.find(this.endpoints, (x: Endpoint) => x.address === address);
+		return endpoint ? endpoint : false;
+	}
 }

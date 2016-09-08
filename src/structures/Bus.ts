@@ -1,4 +1,4 @@
-import { endpoint, ReplyHubMemoryCache, SendRule } from './';
+import { ReplyHubMemoryCache, SendRule } from '../';
 
 /** Number of milliseconds for default reply messages before timing out with error */
 const REPLY_HUB_MEMORY_CACHE_TIMEOUT = 5000000;

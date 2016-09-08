@@ -9,3 +9,4 @@ export { ReplyHubMemoryCache } from './structures/ReplyHubMemoryCache';
 export { SendRule } from './structures/config/SendRule';
 export { Principal } from '';
 export { BusMessageContext } from './structures/BusMessageContext';
+export { Endpoint } from './structures/Endpoint';

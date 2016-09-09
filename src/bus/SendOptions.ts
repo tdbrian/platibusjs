@@ -1,11 +1,9 @@
-import { MessageImportanceValue } from '../';
+import { Record, List } from 'immutable';
+import { makeTypedFactory, TypedRecord } from 'typed-immutable-record';
+import { MessageImportanceType, importanceValues } from '../';
 
-/** 
- * Parameters that influence how a message is sent.
- * @class
- * @export
- */
-export class SendOptions {
+/** Parameters that influence how a message is sent. */
+interface ISendOptions {
 	
 	/**	
 	 * The MIME type of the message content. This influences how the message will be serialized.  For example,
@@ -17,16 +15,7 @@ export class SendOptions {
 	 * @link ISerializationService
 	 */
 	contentType: string;
-	
-	/**
-	 * The maximum Time To Live (TTL) for the message.  When the TTL expires all attempts to deliver or handle the message 
-	 * will stop.
-	 * 
-	 * @type {number}
-	 * @memberOf SendOptions
-	 */
-	ttl: number;
-	
+
 	/**
 	 * The importance of the message.
 	 * 
@@ -38,5 +27,24 @@ export class SendOptions {
 	 * @memberOf SendOptions
 	 * @link MessageImportance
 	 */
-	importance: MessageImportanceValue;
-}
+	importance: MessageImportanceType;
+
+	/**
+	 * The maximum Time To Live (TTL) for the message.  When the TTL expires all attempts to deliver or handle the message 
+	 * will stop.
+	 * 
+	 * @type {number}
+	 * @memberOf SendOptions
+	 */
+	ttl: number;
+};
+
+export let defaultSendOptions = {
+	contentType: '',
+	importance: importanceValues.normalValue as MessageImportanceType,
+	ttl: 0
+};
+
+/** The information associated a message once sent on the Bus. */
+export interface ISendOptionsRecord extends TypedRecord<ISendOptionsRecord>, ISendOptions {} 
+export const BusMessageContextFactory = makeTypedFactory<ISendOptions, ISendOptionsRecord>(defaultSendOptions);

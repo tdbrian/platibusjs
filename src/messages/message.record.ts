@@ -1,7 +1,11 @@
-import { Record, Map } from 'immutable';
+import { recordify, TypedRecord } from 'typed-immutable-record';
+import { Map } from 'immutable';
 import { HeaderNameType, headerNameValues } from '../';
 
-export let MessageRecord = Record({
-	content: '',
-	headers: Map<string, HeaderNameType>({})
-});
+export interface IMessage {
+	content: string;
+	headers: Map<string, HeaderNameType>;
+};
+
+interface IMessageRecord extends TypedRecord<IMessageRecord>, IMessage {}
+export const messageFactory = (message: IMessage) => recordify<IMessage, IMessageRecord>(message);

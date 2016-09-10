@@ -1,9 +1,9 @@
-import { Record, List } from 'immutable';
-import { makeTypedFactory, TypedRecord } from 'typed-immutable-record';
+import { List } from 'immutable';
+import { recordify, TypedRecord } from 'typed-immutable-record';
 import { MessageImportanceType, importanceValues } from '../';
 
 /** Parameters that influence how a message is sent. */
-interface ISendOptions {
+export interface ISendOptions {
 	
 	/**	
 	 * The MIME type of the message content. This influences how the message will be serialized.  For example,
@@ -39,12 +39,5 @@ interface ISendOptions {
 	ttl: number;
 };
 
-export let defaultSendOptions = {
-	contentType: '',
-	importance: importanceValues.normalValue as MessageImportanceType,
-	ttl: 0
-};
-
-/** The information associated a message once sent on the Bus. */
 export interface ISendOptionsRecord extends TypedRecord<ISendOptionsRecord>, ISendOptions {} 
-export const BusMessageContextFactory = makeTypedFactory<ISendOptions, ISendOptionsRecord>(defaultSendOptions);
+export const sendOptionsFactory = (sendOptions: ISendOptions) => recordify<ISendOptions, ISendOptionsRecord>(sendOptions);

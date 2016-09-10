@@ -17,8 +17,5 @@ export interface IMessageHeader {
 	topic: string
 }
 
-interface IMessageHeaderRecord extends TypedRecord<IMessageHeaderRecord>, IMessageHeader {}
-
-export function MessageHeaderFactory(messageHeader: IMessageHeader) {
-	return recordify<IMessageHeader, IMessageHeaderRecord>(messageHeader);
-}
+export interface IMessageHeaderRecord extends TypedRecord<IMessageHeaderRecord>, IMessageHeader {}
+export const messageHeaderFactory = (messageHeader: IMessageHeader) => recordify<IMessageHeader, IMessageHeaderRecord>(messageHeader);

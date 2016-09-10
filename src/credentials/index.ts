@@ -1,1 +1,1 @@
-export { ClientCredentialEnum } from './client-credential.enum';
+export * from './client-credential.enum';

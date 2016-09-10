@@ -4,3 +4,4 @@ export * from './endpoints/';
 export * from './messages/';
 export * from './rules/';
 export * from './subscriptions/';
+export * from './utils/';
